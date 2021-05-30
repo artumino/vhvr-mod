@@ -17,6 +17,9 @@ namespace ValheimVRMod.Scripts {
         }
 
         private GameObject syncable(GameObject obj) {
+            
+            Debug.Log("Making Objects Syncable");
+            
             obj.AddComponent<ZSyncTransform>();
             obj.AddComponent<ZNetView>();
             return obj;
@@ -40,6 +43,8 @@ namespace ValheimVRMod.Scripts {
                 return;
             } 
             
+            Debug.Log("Sending VR Data");
+            
             ZPackage pkg = new ZPackage();
             pkg.Write(camera.GetComponent<ZNetView>().GetZDO().m_uid);
             pkg.Write(leftHand.GetComponent<ZNetView>().GetZDO().m_uid);
@@ -53,12 +58,14 @@ namespace ValheimVRMod.Scripts {
             if (vrikInitialized) {
                 return;
             }
-            
+
             var vr_data = GetComponent<ZNetView>().GetZDO().GetByteArray("vr_data");
             
             if (vr_data == null) {
                 return;
             }
+            
+            Debug.Log("Trying init VRIK");
 
             ZPackage pkg = new ZPackage(vr_data);
 
