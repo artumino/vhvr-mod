@@ -13,13 +13,13 @@ namespace ValheimVRMod.Scripts {
             camera = syncable(cam);
             leftHand = syncable(lHand);
             rightHand = syncable(rHand);
-
+            ZNetView.m_initZDO = null;
         }
 
         private GameObject syncable(GameObject obj) {
             
             Debug.Log("Making Objects Syncable");
-            
+            ZNetView.m_initZDO = ZDOPool.Create(ZDOMan.instance);
             obj.AddComponent<ZNetView>();
             obj.AddComponent<ZSyncTransform>();
             return obj;
@@ -69,9 +69,9 @@ namespace ValheimVRMod.Scripts {
 
             ZPackage pkg = new ZPackage(vr_data);
 
-            camera = ZNetScene.instance.FindInstance(pkg.ReadZDOID()).gameObject;
-            leftHand = ZNetScene.instance.FindInstance(pkg.ReadZDOID()).gameObject;
-            rightHand = ZNetScene.instance.FindInstance(pkg.ReadZDOID()).gameObject;
+            camera = ZNetScene.instance.FindInstance(pkg.ReadZDOID());
+            leftHand = ZNetScene.instance.FindInstance(pkg.ReadZDOID());
+            rightHand = ZNetScene.instance.FindInstance(pkg.ReadZDOID());
             
             VrikCreator.initialize(gameObject, leftHand.transform,
                 rightHand.transform, camera.transform);
