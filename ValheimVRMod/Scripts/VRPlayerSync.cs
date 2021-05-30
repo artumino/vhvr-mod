@@ -10,10 +10,11 @@ namespace ValheimVRMod.Scripts {
         public GameObject leftHand = new GameObject();
         
         public void initialize(GameObject cam, GameObject lHand, GameObject rHand) {
+            var oldZdo = ZNetView.m_initZDO;
             camera = syncable(cam);
             leftHand = syncable(lHand);
             rightHand = syncable(rHand);
-            ZNetView.m_initZDO = null;
+            ZNetView.m_initZDO = oldZdo;
         }
 
         private GameObject syncable(GameObject obj) {
