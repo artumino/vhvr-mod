@@ -20,8 +20,8 @@ namespace ValheimVRMod.Scripts {
             
             Debug.Log("Making Objects Syncable");
             
-            obj.AddComponent<ZSyncTransform>();
             obj.AddComponent<ZNetView>();
+            obj.AddComponent<ZSyncTransform>();
             return obj;
         }
 
