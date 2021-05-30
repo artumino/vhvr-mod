@@ -18,9 +18,9 @@ namespace ValheimVRMod.Scripts {
         private GameObject syncable(GameObject obj) {
             
             Debug.Log("Making Objects Syncable");
-            obj.AddComponent<ZNetView>();
+            obj.AddComponent<ZNetView>().GetZDO().SetPrefab("VrObj".GetStableHashCode());
             obj.AddComponent<ZSyncTransform>().SyncNow();
-            
+
             return obj;
         }
 
