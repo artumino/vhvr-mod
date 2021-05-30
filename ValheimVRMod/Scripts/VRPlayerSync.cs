@@ -19,8 +19,8 @@ namespace ValheimVRMod.Scripts {
             
             Debug.Log("Making Objects Syncable");
             obj.AddComponent<ZNetView>();
-            obj.AddComponent<ZSyncTransform>();
-            ZNetScene.instance.SpawnObject(Vector3.zero, Quaternion.identity, obj);
+            obj.AddComponent<ZSyncTransform>().SyncNow();
+            
             return obj;
         }
 
