@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace ValheimVRMod.Scripts {
@@ -9,39 +10,21 @@ namespace ValheimVRMod.Scripts {
         public GameObject rightHand = new GameObject();
         public GameObject leftHand = new GameObject();
 
-        private void FixedUpdate() {
-
-            Player player = GetComponent<Player>();
-
-            if (player == Player.m_localPlayer) {
-                sendVrData();
-            }
-            else if (GetComponent<ZNetView>() != null) {
-                receiveVrData();
-            }
+        private void Awake() {
+            GetComponent<ZNetView>().Register("VrSyncObjects", new Action<long, Transform, Transform, Transform>(RPC_VrSyncObjects));
         }
 
-        private void sendVrData() {
-            GetComponent<ZNetView>().GetZDO().Set("vr_cam_pos", camera.transform.position);
-            GetComponent<ZNetView>().GetZDO().Set("vr_cam_rot", camera.transform.rotation);
-            GetComponent<ZNetView>().GetZDO().Set("vr_rh_pos", rightHand.transform.position);
-            GetComponent<ZNetView>().GetZDO().Set("vr_rh_rot", rightHand.transform.rotation);
-            GetComponent<ZNetView>().GetZDO().Set("vr_lh_pos", leftHand.transform.position);
-            GetComponent<ZNetView>().GetZDO().Set("vr_lh_rot", leftHand.transform.rotation);
-        }
-        
-        private void receiveVrData() {
-             camera.transform.position = GetComponent<ZNetView>().GetZDO().GetVec3("vr_cam_pos", Vector3.zero);
-             camera.transform.rotation = GetComponent<ZNetView>().GetZDO().GetQuaternion("vr_cam_rot", Quaternion.identity);
-             rightHand.transform.position = GetComponent<ZNetView>().GetZDO().GetVec3("vr_rh_pos", Vector3.zero);
-             rightHand.transform.rotation = GetComponent<ZNetView>().GetZDO().GetQuaternion("vr_rh_rot", Quaternion.identity);
-             leftHand.transform.position = GetComponent<ZNetView>().GetZDO().GetVec3("vr_lh_pos", Vector3.zero);
-             leftHand.transform.rotation = GetComponent<ZNetView>().GetZDO().GetQuaternion("vr_lh_rot", Quaternion.identity);
-             maybeAddVrik();
-        }
-
-        private void maybeAddVrik() {
-            if (vrikInitialized || camera.transform.position == Vector3.zero) {
+        private void RPC_VrSyncObjects(long sender, Transform cam, Transform lHand, Transform rHand) {
+            
+            Debug.Log("Invoked RPC_VrSyncObjects !");
+            camera.transform.position = cam.position;
+            camera.transform.rotation = cam.rotation;
+            leftHand.transform.position = lHand.position;
+            leftHand.transform.rotation = lHand.rotation;
+            rightHand.transform.position = rHand.position;
+            rightHand.transform.rotation = rHand.rotation;
+            
+            if (vrikInitialized) {
                 return;
             }
 
@@ -49,6 +32,17 @@ namespace ValheimVRMod.Scripts {
                 rightHand.transform, camera.transform);
             
             vrikInitialized = true;
+
+        }
+
+        private void Update() {
+
+            Player player = GetComponent<Player>();
+
+            if (player == Player.m_localPlayer) {
+                GetComponent<ZNetView>().InvokeRPC(ZNetView.Everybody, "VrSyncObjects", 
+                    camera.transform, leftHand.transform, rightHand.transform);
+            }
         }
     }
 }
