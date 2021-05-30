@@ -597,8 +597,6 @@ namespace ValheimVRMod.VRCore
             {
                 return;
             }
-            
-            Debug.Log("wtf");
 
             var vrik = VrikCreator.initialize(player.gameObject, 
                 leftHand.transform, rightHand.transform,

@@ -5,9 +5,9 @@ namespace ValheimVRMod.Scripts {
 
         private bool vrikInitialized;
         
-        public GameObject camera = new GameObject();
-        public GameObject rightHand = new GameObject();
-        public GameObject leftHand = new GameObject();
+        private GameObject camera;
+        private GameObject rightHand;
+        private GameObject leftHand;
         
         public void initialize(GameObject cam, GameObject lHand, GameObject rHand) {
             camera = syncable(cam);
@@ -40,7 +40,7 @@ namespace ValheimVRMod.Scripts {
             // send vr data after each second
             if (Time.fixedTime - lastTimeChecked < 1.0f) {
                 return;
-            } 
+            }
             
             Debug.Log("Sending VR Data");
             
