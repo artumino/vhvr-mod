@@ -11,15 +11,15 @@ namespace ValheimVRMod.Scripts {
         public GameObject leftHand = new GameObject();
 
         private void Awake() {
-            if (GetComponent<Player>() == Player.m_localPlayer) {
-                GetComponent<ZNetView>().Register("VrSyncObjects", new Action<long, ZPackage>(RPC_VrSyncObjects));
-            }
+            //if (GetComponent<Player>() == Player.m_localPlayer) {
+            GetComponent<ZNetView>().Register("VrSyncObjects", new Action<long, ZPackage>(RPC_VrSyncObjects));
+            //}
         }
 
         private void RPC_VrSyncObjects(long sender, ZPackage pkg) {
             
             foreach (Player player in Player.GetAllPlayers()) {
-                if (player.GetComponent<ZNetView>().GetZDO().m_owner == sender) {
+                if (player != Player.m_localPlayer && player.GetComponent<ZNetView>().GetZDO().m_owner == sender) {
                     player.GetComponent<VRPlayerSync>().UpdateOtherPlayer(pkg);
                 }
             }
@@ -30,10 +30,10 @@ namespace ValheimVRMod.Scripts {
             Debug.Log("Invoked RPC_VrSyncObjects !");
             camera.transform.position = pkg.ReadVector3();
             camera.transform.rotation = pkg.ReadQuaternion();
-            leftHand.transform.position = pkg.ReadVector3();;
-            leftHand.transform.rotation = pkg.ReadQuaternion();;
-            rightHand.transform.position = pkg.ReadVector3();;
-            rightHand.transform.rotation = pkg.ReadQuaternion();;
+            leftHand.transform.position = pkg.ReadVector3();
+            leftHand.transform.rotation = pkg.ReadQuaternion();
+            rightHand.transform.position = pkg.ReadVector3();
+            rightHand.transform.rotation = pkg.ReadQuaternion();
 
             if (vrikInitialized) {
                 return;
