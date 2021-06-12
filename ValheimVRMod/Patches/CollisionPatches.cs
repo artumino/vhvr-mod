@@ -67,10 +67,10 @@ namespace ValheimVRMod.Patches {
             }
             
             if (Player.m_localPlayer != player) {
-                Debug.Log("patching Left Hand Equiped of other Player");
+                Debug.Log("patching Left Hand Equiped of other Player: " + ___m_leftItem );
             }
 
-            if (Player.m_localPlayer != player && EquipScript.getLeft(player) == EquipType.Bow) {
+            if (Player.m_localPlayer != player && ___m_leftItem == "Bow") {
                 
                 Debug.Log("other player Bow Equipped");
                 

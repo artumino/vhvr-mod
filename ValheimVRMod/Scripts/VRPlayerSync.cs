@@ -120,7 +120,7 @@ namespace ValheimVRMod.Scripts {
             writeFingers(pkg, GetComponent<VRIK>().references.leftHand);
             writeFingers(pkg, GetComponent<VRIK>().references.rightHand);
             pkg.Write((bool)BowLocalManager.instance?.pulling);
-            if (BowLocalManager.instance.pulling)
+            if ((bool)BowLocalManager.instance?.pulling)
                 Debug.Log("local player plulling");
             
             GetComponent<ZNetView>().GetZDO().Set("vr_data", pkg.GetArray());
