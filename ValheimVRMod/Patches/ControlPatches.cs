@@ -201,7 +201,7 @@ namespace ValheimVRMod.Patches {
                 wasCrouching = false;
             }
 
-            if (EquipScript.getLeft(Player.m_localPlayer) == EquipType.Bow) {
+            if (EquipScript.getLeft() == EquipType.Bow) {
                 if (BowLocalManager.aborting) {
                     block = true;
                     blockHold = true;
@@ -217,7 +217,7 @@ namespace ValheimVRMod.Patches {
                 return;
             }
 
-            if (EquipScript.getLeft(Player.m_localPlayer) == EquipType.Shield) {
+            if (EquipScript.getLeft() == EquipType.Shield) {
                 blockHold = ShieldManager.isBlocking();
             }
 
