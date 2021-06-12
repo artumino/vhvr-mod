@@ -67,22 +67,26 @@ namespace ValheimVRMod.Patches {
             }
             
             if (Player.m_localPlayer != player) {
-                Debug.Log("patching Left Hand Equiped of other Player: " + ___m_leftItem );
+                Debug.Log("patching Left Hand Equiped of other Player: " + ___m_leftItem + " --- " + ___m_leftItemInstance.name + " --- " + player.GetLeftItem()?.m_shared?.m_name);
             }
 
-            if (Player.m_localPlayer != player && ___m_leftItem == "Bow") {
+            if (Player.m_localPlayer != player) {
+
+                Debug.Log("other player checking bow");
                 
-                Debug.Log("other player Bow Equipped");
-                
-                BowManager bowManager = meshFilter.gameObject.AddComponent<BowManager>();
-                var vrPlayerSync = player.GetComponent<VRPlayerSync>();
-                if (vrPlayerSync != null) {
+                if (___m_leftItem == "Bow") {
+                    Debug.Log("other player Bow Equipped");
+                    BowManager bowManager = meshFilter.gameObject.AddComponent<BowManager>();
+                    var vrPlayerSync = player.GetComponent<VRPlayerSync>();
+                    if (vrPlayerSync != null) {
                     
-                    Debug.Log("other player bow references");
+                        Debug.Log("other player bow references");
                     
-                    vrPlayerSync.bowManager = bowManager;
-                    bowManager.rightHand = vrPlayerSync.rightHand.transform;
+                        vrPlayerSync.bowManager = bowManager;
+                        bowManager.rightHand = vrPlayerSync.rightHand.transform;
+                    }
                 }
+
                 return;
             }           
             
