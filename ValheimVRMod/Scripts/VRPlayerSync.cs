@@ -50,7 +50,9 @@ namespace ValheimVRMod.Scripts {
                 updateOwnerLastPositions();
             } else {
                 bowManager = GetComponentInChildren<BowManager>();
-                bowManager.rightHand = rightHand.transform;
+                if (bowManager != null) {
+                    bowManager.rightHand = rightHand.transform;
+                }
             }
         }
 
@@ -118,6 +120,8 @@ namespace ValheimVRMod.Scripts {
             writeFingers(pkg, GetComponent<VRIK>().references.leftHand);
             writeFingers(pkg, GetComponent<VRIK>().references.rightHand);
             pkg.Write(BowLocalManager.instance.pulling);
+            if (BowLocalManager.instance.pulling)
+                Debug.Log("local player plulling");
             
             GetComponent<ZNetView>().GetZDO().Set("vr_data", pkg.GetArray());
         }
@@ -172,6 +176,10 @@ namespace ValheimVRMod.Scripts {
             if (bowManager == null) {
                 return;
             }
+            Debug.Log("maybe Pull Other Player");
+            
+            if (pulling)
+                Debug.Log("Other Player pulling");
 
             bowManager.pulling = pulling;
         }
