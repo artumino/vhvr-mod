@@ -41,11 +41,16 @@ namespace ValheimVRMod.Scripts {
 
         private bool fingersUpdated;
 
+        public BowManager bowManager;
+
         void Start()
         {
             if (isOwner())
             {
                 updateOwnerLastPositions();
+            } else {
+                bowManager = GetComponentInChildren<BowManager>();
+                bowManager.rightHand = rightHand.transform;
             }
         }
 
@@ -112,6 +117,7 @@ namespace ValheimVRMod.Scripts {
             writeData(pkg, rightHand, ownerVelocityRight);
             writeFingers(pkg, GetComponent<VRIK>().references.leftHand);
             writeFingers(pkg, GetComponent<VRIK>().references.rightHand);
+            pkg.Write(BowLocalManager.instance.pulling);
             
             GetComponent<ZNetView>().GetZDO().Set("vr_data", pkg.GetArray());
         }
@@ -126,7 +132,7 @@ namespace ValheimVRMod.Scripts {
         private void clientSync(float dt)
         {
             if (syncPositionAndRotation(GetComponent<ZNetView>().GetZDO(), dt)) {
-                maybeAddVrik();   
+                maybeAddVrik();
             }
         }
 
@@ -158,8 +164,16 @@ namespace ValheimVRMod.Scripts {
             extractAndUpdate(pkg, ref rightHand, ref clientTempRelPosRight, hasTempRelPos);
             hasTempRelPos = true;
             readFingers(pkg);
+            maybePullBow(pkg.ReadBool());
             return true;
+        }
 
+        private void maybePullBow(bool pulling) {
+            if (bowManager == null) {
+                return;
+            }
+
+            bowManager.pulling = pulling;
         }
 
         private void extractAndUpdate(ZPackage pkg, ref GameObject obj, ref Vector3 tempRelPos, bool hasTempRelPos)

@@ -201,23 +201,23 @@ namespace ValheimVRMod.Patches {
                 wasCrouching = false;
             }
 
-            if (EquipScript.getLeft() == EquipType.Bow) {
-                if (BowManager.aborting) {
+            if (EquipScript.getLeft(Player.m_localPlayer) == EquipType.Bow) {
+                if (BowLocalManager.aborting) {
                     block = true;
                     blockHold = true;
-                    BowManager.aborting = false;
+                    BowLocalManager.aborting = false;
                 }
-                else if (BowManager.startedPulling) {
+                else if (BowLocalManager.startedPulling) {
                     attack = true;
-                    BowManager.startedPulling = false;
+                    BowLocalManager.startedPulling = false;
                 }
                 else {
-                    attackHold = BowManager.isPulling;
+                    attackHold = BowLocalManager.isPulling;
                 }
                 return;
             }
 
-            if (EquipScript.getLeft() == EquipType.Shield) {
+            if (EquipScript.getLeft(Player.m_localPlayer) == EquipType.Shield) {
                 blockHold = ShieldManager.isBlocking();
             }
 

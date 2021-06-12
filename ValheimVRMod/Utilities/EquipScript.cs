@@ -28,9 +28,9 @@ namespace ValheimVRMod.Utilities {
             return EquipType.None;
         }
 
-        public static EquipType getLeft() {
+        public static EquipType getLeft(Player player) {
 
-            switch (Player.m_localPlayer.GetLeftItem()?.m_shared.m_itemType) {
+            switch (player.GetLeftItem()?.m_shared.m_itemType) {
                 case ItemDrop.ItemData.ItemType.Bow:
                     return EquipType.Bow;
 

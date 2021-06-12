@@ -65,15 +65,25 @@ namespace ValheimVRMod.Patches {
             }
 
             Player player = ___m_leftItemInstance.GetComponentInParent<Player>();
-            // only local player must trigger this
-            if (player == null || Player.m_localPlayer != player) {
+            
+            if (player == null) {
                 return;
             }
 
-            switch (EquipScript.getLeft()) {
+            if (Player.m_localPlayer != player && EquipScript.getLeft(player) == EquipType.Bow) {
+                BowManager bowManager = meshFilter.gameObject.AddComponent<BowManager>();
+                var vrPlayerSync = player.GetComponent<VRPlayerSync>();
+                if (vrPlayerSync != null) {
+                    vrPlayerSync.bowManager = bowManager;
+                    bowManager.rightHand = vrPlayerSync.rightHand.transform;
+                }
+                return;
+            }
+
+            switch (EquipScript.getLeft(Player.m_localPlayer)) {
                 
                 case EquipType.Bow:
-                    meshFilter.gameObject.AddComponent<BowManager>();
+                    meshFilter.gameObject.AddComponent<BowLocalManager>();
                     return;
                 
                 case EquipType.Shield:

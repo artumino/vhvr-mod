@@ -19,8 +19,8 @@ namespace ValheimVRMod.Patches {
                 return true;
             }
 
-            if (EquipScript.getLeft() == EquipType.Bow) {
-                __result = BowManager.attackDrawPercentage;
+            if (EquipScript.getLeft(Player.m_localPlayer) == EquipType.Bow) {
+                __result = BowLocalManager.attackDrawPercentage;
                 return false;
             }
 
@@ -47,9 +47,9 @@ namespace ValheimVRMod.Patches {
                 return true;
             }
 
-            if (EquipScript.getLeft() == EquipType.Bow) {
-                spawnPoint = BowManager.spawnPoint;
-                aimDir = BowManager.aimDir;
+            if (EquipScript.getLeft(Player.m_localPlayer) == EquipType.Bow) {
+                spawnPoint = BowLocalManager.spawnPoint;
+                aimDir = BowLocalManager.aimDir;
                 return false;
             }
             
