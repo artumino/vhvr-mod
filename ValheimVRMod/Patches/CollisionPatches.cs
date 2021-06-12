@@ -50,14 +50,10 @@ namespace ValheimVRMod.Patches {
     [HarmonyPatch(typeof(VisEquipment), "SetLeftHandEquiped")]
     class PatchSetLeftHandEquiped {
         static void Postfix(bool __result, string ___m_leftItem, GameObject ___m_leftItemInstance) {
-            if (!__result || ___m_leftItemInstance == null || !VHVRConfig.UseVrControls()) {
+            if (!__result || ___m_leftItemInstance == null) {
                 return;
-            }
-
-            if (StaticObjects.quickSwitch != null) {
-                QuickSwitch.refreshItems();
-            }
-
+            } 
+                          
             MeshFilter meshFilter = ___m_leftItemInstance.GetComponentInChildren<MeshFilter>();
 
             if (meshFilter == null) {
@@ -69,7 +65,7 @@ namespace ValheimVRMod.Patches {
             if (player == null) {
                 return;
             }
-
+            
             if (Player.m_localPlayer != player) {
                 Debug.Log("patching Left Hand Equiped of other Player");
             }
@@ -88,6 +84,14 @@ namespace ValheimVRMod.Patches {
                     bowManager.rightHand = vrPlayerSync.rightHand.transform;
                 }
                 return;
+            }           
+            
+            if (!VHVRConfig.UseVrControls()) {
+                return;
+            }
+
+            if (StaticObjects.quickSwitch != null) {
+                QuickSwitch.refreshItems();
             }
 
             switch (EquipScript.getLeft(Player.m_localPlayer)) {

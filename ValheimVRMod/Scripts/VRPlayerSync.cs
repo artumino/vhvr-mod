@@ -119,7 +119,7 @@ namespace ValheimVRMod.Scripts {
             writeData(pkg, rightHand, ownerVelocityRight);
             writeFingers(pkg, GetComponent<VRIK>().references.leftHand);
             writeFingers(pkg, GetComponent<VRIK>().references.rightHand);
-            pkg.Write(BowLocalManager.instance.pulling);
+            pkg.Write((bool)BowLocalManager.instance?.pulling);
             if (BowLocalManager.instance.pulling)
                 Debug.Log("local player plulling");
             
