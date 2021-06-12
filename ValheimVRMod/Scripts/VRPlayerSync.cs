@@ -173,11 +173,6 @@ namespace ValheimVRMod.Scripts {
                 bowManager = currentLeftWeapon.AddComponent<BowManager>();
                 bowManager.rightHand = rightHand.transform;
             }
-            
-            Debug.Log("Other Player maybe pulling");
-            
-            if (pulling)
-                Debug.Log("Other Player is pulling");
 
             bowManager.pulling = pulling;
         }

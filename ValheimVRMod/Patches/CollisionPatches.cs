@@ -67,7 +67,6 @@ namespace ValheimVRMod.Patches {
             }
 
             if (Player.m_localPlayer != player) {
-                Debug.Log("other player setting currentWeapon");
                 player.GetComponent<VRPlayerSync>().currentLeftWeapon = meshFilter.gameObject;
                 return;
             }           
