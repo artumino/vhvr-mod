@@ -7,6 +7,7 @@ using ValheimVRMod.VRCore;
 using Valve.VR;
 
 namespace ValheimVRMod.Scripts {
+    [DefaultExecutionOrder(10000)]
     public class WeaponCollision : MonoBehaviour {
         private const float MIN_DISTANCE = 0.2f;
         private const float MIN_DISTANCE_STAB = 0.25f;
@@ -15,7 +16,7 @@ namespace ValheimVRMod.Scripts {
         private const float MAX_STAB_ANGLE = 20f;
 
         private bool scriptActive;
-        private GameObject colliderParent = new GameObject();
+        private GameObject colliderParent;
         private List<Vector3> snapshots = new List<Vector3>();
         private List<Vector3> snapshotsC = new List<Vector3>();
         private ItemDrop.ItemData item;
@@ -28,6 +29,10 @@ namespace ValheimVRMod.Scripts {
         
         private int maxSnapshots;
         private float colliderDistance;
+
+        private void Awake() {
+           colliderParent = new GameObject();
+        }
 
         private void OnTriggerEnter(Collider collider) {
             if (!isCollisionAllowed()) {
@@ -91,7 +96,7 @@ namespace ValheimVRMod.Scripts {
             return meshCooldown.tryTrigger(hitTime);
         }
 
-        private void OnRenderObject() {
+        private void LateUpdate() {
             if (!isCollisionAllowed()) {
                 return;
             }

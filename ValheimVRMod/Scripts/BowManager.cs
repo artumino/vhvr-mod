@@ -2,6 +2,7 @@
 using UnityEngine;
 
 namespace ValheimVRMod.Scripts {
+    [DefaultExecutionOrder(10000)]
     public class BowManager : MonoBehaviour {
         
         private const float minStringSize = 0.965f;
@@ -94,11 +95,7 @@ namespace ValheimVRMod.Scripts {
             lineRenderer.material.color = new Color(0.703125f, 0.48828125f, 0.28515625f); // just a random brown color
         }
 
-        /**
-     * Need to use OnRenderObject instead of Update or LateUpdate,
-     * because of VRIK Bone Updates happening in LateUpdate 
-     */
-        protected void OnRenderObject() {
+        protected void LateUpdate() {
 
             if (!initialized) {
                 return;

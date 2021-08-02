@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 using ValheimVRMod.Utilities;
 
 namespace ValheimVRMod.Scripts {
+    [DefaultExecutionOrder(10000)]
     public class SpearManager : MonoBehaviour {
         private const int MAX_SNAPSHOTS = 7;
         private const int MIN_SNAPSHOTSCHECK = 3;
@@ -66,7 +67,7 @@ namespace ValheimVRMod.Scripts {
             Destroy(directionLine,directionCooldown);
         }
 
-        private void OnRenderObject() {
+        private void LateUpdate() {
             fixedSpear.transform.position = transform.position;
             if (VHVRConfig.SpearTwoHanded()) {
                 if (SteamVR_Actions.valheim_Grab.GetState(SteamVR_Input_Sources.LeftHand) && SteamVR_Actions.valheim_Grab.GetState(SteamVR_Input_Sources.RightHand)) {

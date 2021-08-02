@@ -6,6 +6,7 @@ using ValheimVRMod.VRCore;
 using Valve.VR;
 
 namespace ValheimVRMod.Scripts {
+    [DefaultExecutionOrder(10000)]
     public class FistCollision : MonoBehaviour {
         private const float MIN_DISTANCE = 0.2f;
         private const int MAX_SNAPSHOTS = 20;
@@ -77,7 +78,7 @@ namespace ValheimVRMod.Scripts {
             return meshCooldown.tryTrigger(0.63f);
         }
 
-        private void OnRenderObject() {
+        private void LateUpdate() {
             transform.SetParent(colliderParent.transform);
             transform.localRotation = Quaternion.identity;
             transform.localPosition = Vector3.zero;

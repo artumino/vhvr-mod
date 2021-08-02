@@ -3,6 +3,7 @@ using ValheimVRMod.VRCore;
 using Valve.VR.InteractionSystem;
 
 namespace ValheimVRMod.Scripts {
+    [DefaultExecutionOrder(10000)]
     public class HandGesture : MonoBehaviour {
         
         private bool isRightHand;
@@ -19,7 +20,7 @@ namespace ValheimVRMod.Scripts {
             }
         }
 
-        void OnRenderObject() {
+        void LateUpdate() {
             handFixedRotation = transform.rotation;
         }
 

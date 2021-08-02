@@ -1,6 +1,7 @@
 using UnityEngine;
 
 namespace ValheimVRMod.Scripts {
+    [DefaultExecutionOrder(10000)]
     public class ParticleFix : MonoBehaviour {
 
         private Transform origin;
@@ -12,7 +13,7 @@ namespace ValheimVRMod.Scripts {
             transform.SetParent(null);
         }
         
-        private void OnRenderObject() {
+        private void LateUpdate() {
 
             if (origin == null) {
                 Destroy(gameObject);

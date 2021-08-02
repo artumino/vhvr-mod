@@ -4,6 +4,7 @@ using ValheimVRMod.VRCore;
 using Valve.VR;
 
 namespace ValheimVRMod.Scripts {
+    [DefaultExecutionOrder(10000)]
     public class FishingManager : MonoBehaviour {
         private const int MAX_SNAPSHOTS = 7;
         private const int MIN_SNAPSHOTSCHECK = 3;
@@ -44,7 +45,7 @@ namespace ValheimVRMod.Scripts {
             isFishing = false;
         }
 
-        private void OnRenderObject() {
+        private void LateUpdate() {
             fixedRodTop.transform.position = rodTop.position;
             isPulling = isFishing && SteamVR_Actions.valheim_Grab.GetState(SteamVR_Input_Sources.RightHand);
             if (!isFishing && SteamVR_Actions.valheim_Grab.GetStateDown(SteamVR_Input_Sources.RightHand)) {

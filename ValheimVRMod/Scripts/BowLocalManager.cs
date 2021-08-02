@@ -6,6 +6,7 @@ using ValheimVRMod.VRCore;
 using Valve.VR;
 
 namespace ValheimVRMod.Scripts {
+    [DefaultExecutionOrder(10000)]
     public class BowLocalManager : BowManager {
         private const float attachRange = 0.2f;
         private GameObject arrow;
@@ -67,18 +68,14 @@ namespace ValheimVRMod.Scripts {
                 arrow.GetComponent<ZNetView>().Destroy();   
             }
         }
-        
-        /**
-     * Need to use OnRenderObject instead of Update or LateUpdate,
-     * because of VRIK Bone Updates happening in LateUpdate 
-     */
-        protected new void OnRenderObject() {
+
+        protected new void LateUpdate() {
             
             if (!initialized) {
                 return;
             }
             
-            base.OnRenderObject();
+            base.LateUpdate();
 
             if (SteamVR_Actions.valheim_Grab.GetState(SteamVR_Input_Sources.RightHand)) {
                 handlePulling();

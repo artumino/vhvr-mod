@@ -4,6 +4,7 @@ using ValheimVRMod.Utilities;
 using ValheimVRMod.VRCore;
 
 namespace ValheimVRMod.Scripts {
+    [DefaultExecutionOrder(10000)]
     public class ShieldManager : MonoBehaviour {
         
         public string _name;
@@ -104,7 +105,7 @@ namespace ValheimVRMod.Scripts {
             ParryCheck();
         }
 
-        private void OnRenderObject() {
+        private void LateUpdate() {
             if(scaling!=1f) {
                 transform.localScale = scaleRef * scaling;
                 transform.localPosition = CalculatePos();
