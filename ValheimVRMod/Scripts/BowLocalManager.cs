@@ -6,7 +6,7 @@ using ValheimVRMod.VRCore;
 using Valve.VR;
 
 namespace ValheimVRMod.Scripts {
-    [DefaultExecutionOrder(10000)]
+    [DefaultExecutionOrder(WeaponUtils.k_VrikExecutionOrder)]
     public class BowLocalManager : BowManager {
         private const float attachRange = 0.2f;
         private GameObject arrow;

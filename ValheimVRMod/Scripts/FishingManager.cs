@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using ValheimVRMod.Utilities;
 using ValheimVRMod.VRCore;
 using Valve.VR;
 
 namespace ValheimVRMod.Scripts {
-    [DefaultExecutionOrder(10000)]
+    [DefaultExecutionOrder(WeaponUtils.k_VrikExecutionOrder)]
     public class FishingManager : MonoBehaviour {
         private const int MAX_SNAPSHOTS = 7;
         private const int MIN_SNAPSHOTSCHECK = 3;

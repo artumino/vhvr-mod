@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 using ValheimVRMod.Utilities;
 
 namespace ValheimVRMod.Scripts {
-    [DefaultExecutionOrder(10000)]
+    [DefaultExecutionOrder(WeaponUtils.k_VrikExecutionOrder)]
     public class SpearManager : MonoBehaviour {
         private const int MAX_SNAPSHOTS = 7;
         private const int MIN_SNAPSHOTSCHECK = 3;

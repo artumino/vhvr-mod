@@ -7,7 +7,7 @@ using ValheimVRMod.VRCore;
 using Valve.VR;
 
 namespace ValheimVRMod.Scripts {
-    [DefaultExecutionOrder(10000)]
+    [DefaultExecutionOrder(WeaponUtils.k_VrikExecutionOrder)]
     public class WeaponCollision : MonoBehaviour {
         private const float MIN_DISTANCE = 0.2f;
         private const float MIN_DISTANCE_STAB = 0.25f;

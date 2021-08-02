@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -5,6 +6,7 @@ namespace ValheimVRMod.Utilities
 {
     public static class WeaponUtils
     {
+        public const int k_VrikExecutionOrder = 10000;
         
         private static readonly Dictionary<string, WeaponColData> colliders = new Dictionary<string, WeaponColData>
         {

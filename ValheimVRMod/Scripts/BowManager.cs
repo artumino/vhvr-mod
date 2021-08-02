@@ -1,8 +1,9 @@
 ﻿using System.Threading;
 using UnityEngine;
+using ValheimVRMod.Utilities;
 
 namespace ValheimVRMod.Scripts {
-    [DefaultExecutionOrder(10000)]
+    [DefaultExecutionOrder(WeaponUtils.k_VrikExecutionOrder)]
     public class BowManager : MonoBehaviour {
         
         private const float minStringSize = 0.965f;

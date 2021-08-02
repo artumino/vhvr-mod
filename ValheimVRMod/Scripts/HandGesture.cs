@@ -1,9 +1,10 @@
 using UnityEngine;
+using ValheimVRMod.Utilities;
 using ValheimVRMod.VRCore;
 using Valve.VR.InteractionSystem;
 
 namespace ValheimVRMod.Scripts {
-    [DefaultExecutionOrder(10000)]
+    [DefaultExecutionOrder(WeaponUtils.k_VrikExecutionOrder)]
     public class HandGesture : MonoBehaviour {
         
         private bool isRightHand;

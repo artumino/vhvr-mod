@@ -6,7 +6,7 @@ using ValheimVRMod.VRCore;
 using Valve.VR;
 
 namespace ValheimVRMod.Scripts {
-    [DefaultExecutionOrder(10000)]
+    [DefaultExecutionOrder(WeaponUtils.k_VrikExecutionOrder)]
     public class FistCollision : MonoBehaviour {
         private const float MIN_DISTANCE = 0.2f;
         private const int MAX_SNAPSHOTS = 20;

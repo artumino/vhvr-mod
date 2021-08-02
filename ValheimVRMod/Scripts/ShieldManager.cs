@@ -4,7 +4,7 @@ using ValheimVRMod.Utilities;
 using ValheimVRMod.VRCore;
 
 namespace ValheimVRMod.Scripts {
-    [DefaultExecutionOrder(10000)]
+    [DefaultExecutionOrder(WeaponUtils.k_VrikExecutionOrder)]
     public class ShieldManager : MonoBehaviour {
         
         public string _name;
